@@ -33,7 +33,6 @@ int main() {
         0.5f, -0.5f, 0.0f,   
         -0.5f, -0.5f, 0.0f,
     };
-    
     /* Shaders */
     shader_t* t_shader = shader_init("shaders/vertex.glsl", "shaders/fragment.glsl");
     if (!t_shader) {
@@ -71,5 +70,6 @@ int main() {
         glfwSwapBuffers(window);
     }
 
+    free(t_shader);
     glfwDestroyWindow(window);
 }

@@ -17,16 +17,20 @@ shader_t* shader_init(char* v, char* f) {
     read_shd_file(&vertex_buffer, v);
     read_shd_file(&fragment_buffer, f);
 
+    printf("testing shaders!\n");
     unsigned int vertex_shader;
     unsigned int fragment_shader;
 
     vertex_shader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertex_shader, 1, (const char*const*)vertex_buffer, NULL);
+    printf("vertex shaders!\n");
+    glShaderSource(vertex_shader, 1, (const char*const*)&vertex_buffer, NULL);
+    printf("vertex shaders!\n");
     glCompileShader(vertex_shader);
 
     fragment_shader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragment_shader, 1, (const char*const*)fragment_buffer, NULL);
+    glShaderSource(fragment_shader, 1, (const char*const*)&fragment_buffer, NULL);
     glCompileShader(fragment_shader);
+    printf("fragment shaders!\n");
     
     shd->ID = glCreateProgram();
     glAttachShader(shd->ID, vertex_shader);
@@ -35,6 +39,7 @@ shader_t* shader_init(char* v, char* f) {
     
     glDeleteShader(vertex_shader);
     glDeleteShader(fragment_shader);
+    printf("done shaders!\n");
     return shd;
 }
 
