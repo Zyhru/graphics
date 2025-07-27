@@ -1,11 +1,11 @@
 ## TODO
 
-- [ ] Setup glad and glfw
-- [ ] Set up window
+- [x] Setup glad and glfw
+- [x] Set up window
 - [ ] Render triangle
-    - [ ] Set up VBO
-    - [ ] Generate buffer object
-    - [ ] Bind buffer object
-    - [ ] Set the buffer options
-    - [ ] Apply the vertex attribute pointers 
+    - [x] Set up VBO
+    - [x] Generate buffer object
+    - [x] Bind buffer object
+    - [x] Set the buffer options
+    - [x] Apply the vertex attribute pointers 
     - [ ] Load shaders with vertex/fragment glsl file

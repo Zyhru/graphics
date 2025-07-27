@@ -1,3 +1,4 @@
+#include "shader.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -25,10 +26,46 @@ int main() {
     }
 
     glViewport(0, 0, WIDTH, HEIGHT);
+
+    /* Triangle Data */
+    float triangle[] = {
+        0.0f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,   
+        -0.5f, -0.5f, 0.0f,
+    };
+    
+    /* Shaders */
+    shader_t* t_shader = shader_init("shaders/vertex.glsl", "shaders/fragment.glsl");
+    if (!t_shader) {
+        printf("Failed dude!\n");
+        return -1;
+    }
+
+    /* OpenGL Create Objects */
+    unsigned int VAO;
+    unsigned int VBO;
+
+    glGenBuffers(1, &VBO);
+    glGenVertexArrays(1, &VAO);
+
+    /* OpenGL Bind Objects */
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindVertexArray(VAO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+    
+    /* OpenGL Vertex Attrib Pointers */
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+    glEnableVertexAttribArray(0);
     
     while (!glfwWindowShouldClose(window)) {
         glClearColor(0.5f, 0.2f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glUseProgram(t_shader->ID);
+
+        glBindVertexArray(VAO);
+        glDrawArrays(GL_TRIANGLES, triangle[0], 3);
+        glBindVertexArray(0);
 
         glfwPollEvents();
         glfwSwapBuffers(window);
